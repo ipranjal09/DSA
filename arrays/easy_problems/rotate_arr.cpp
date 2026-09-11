@@ -55,12 +55,50 @@ vector<int> rightRotate(vector<int> &arr, int k)
     }
     return arr;
 }
+// reverse function 
+vector<int> reverse(vector<int> &arr, int start, int end)
+{
+    while(start < end)
+    {
+    swap(arr[start],arr[end]);
+    start++;
+    end--;
+    }
+}
+
+// reversing specific part of array(optimal) left
+vector<int> leftRotateOpt(vector<int> &arr, int k)
+{
+    int n = arr.size();
+    //effective rotations
+    k = k % n;
+
+    reverse(arr, 0, k-1);
+    reverse(arr, k, n-1);
+    reverse(arr, 0 , n-1);
+    
+    return arr;
+}
+
+// reversing specific part of array(optimal) right
+vector<int> rightRotateOpt(vector<int> &arr, int k)
+{
+    int n = arr.size();
+    //effective rotations
+    k = k % n;
+
+    reverse(arr, 0, n-1);
+    reverse(arr, 0, k-1);
+    reverse(arr, k , n-1);
+    
+    return arr;
+}
 
 int main()
 {
     vector<int> arr = {1,2,3,4,5};
 
-    vector<int> ans = rightRotate(arr, 2);
+    vector<int> ans = rightRotateOpt(arr, 2);
 
     for(auto it : ans)
     {
